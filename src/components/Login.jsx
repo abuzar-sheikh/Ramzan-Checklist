@@ -36,7 +36,7 @@ const Login = () => {
 
       if (response.ok) {
         // Successful submission, navigate to your page
-        navigate("/dua");
+        navigate("/");
       } else {
         console.error("Form submission failed");
       }

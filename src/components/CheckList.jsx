@@ -110,7 +110,7 @@ const Checklist = () => {
         heightLeft -= pageHeight;
       }
 
-      pdf.save("RamzanChecklist by Sumzar.pdf");
+      pdf.save("RamzanChecklist by The Right Path.pdf");
 
       // Restore the original layout after PDF generation
       input.className = originalClasses; // Restore original class
@@ -139,7 +139,10 @@ const Checklist = () => {
   return (
     <div className="px-4 ">
       <div className="flex justify-between py-4">
-        <h5 className="text-slate-700 font-bold">The Right Path</h5>
+        <h5 className="text-slate-700 font-bold">
+          {" "}
+          {isEnglish ? "The Right Path" : "دی رائٹ پاتھ"}
+        </h5>
         <h1 className="text:lg sm:text-2xl text-slate-800">
           {isEnglish ? "Daily Tasks in Ramadan" : "رمضان چیک لسٹ"}
         </h1>
@@ -215,7 +218,7 @@ const Checklist = () => {
                           }
                           className="block px-4 py-2 text-green-600 hover:bg-green-50 w-full text-center"
                         >
-                          Yes
+                          {isEnglish ? "Yes" : "جی ہاں"}
                         </button>
                         <button
                           onClick={() =>
@@ -223,7 +226,7 @@ const Checklist = () => {
                           }
                           className="block px-4 py-2 text-red-600 hover:bg-red-50 w-full text-center"
                         >
-                          No
+                          {isEnglish ? "No" : "جی نہیں"}
                         </button>
                         <button
                           onClick={() =>
@@ -231,7 +234,7 @@ const Checklist = () => {
                           }
                           className="block px-4 py-2 text-gray-600 hover:bg-gray-50 w-full text-center"
                         >
-                          Remove
+                          {isEnglish ? "Remove" : "ہٹائں"}
                         </button>
                       </div>
                     )}
