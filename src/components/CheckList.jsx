@@ -53,10 +53,13 @@ const Checklist = () => {
 
   const tasks = isEnglish ? tasksEnglish : tasksUrdu;
 
-  // Local storage and checklist management
+  // Local storage and checklist management — validate stored shape
+  const stored = JSON.parse(localStorage.getItem("checklist"));
   const initialChecklist =
-    JSON.parse(localStorage.getItem("checklist")) ||
-    tasks.map(() => Array(30).fill(null));
+    stored && Array.isArray(stored) && stored.length === tasks.length
+      ? stored
+      : tasks.map(() => Array(30).fill(null));
+
   const [checklist, setChecklist] = useState(initialChecklist);
   const [pendingUpdate, setPendingUpdate] = useState({
     taskIndex: null,
@@ -120,37 +123,48 @@ const Checklist = () => {
 
   return (
     <div className="px-4 ">
-      <h3 className="text-center mt-5">Sumiya</h3>
-      {/* Heading */}
-      <h1 className="text-2xl font-bold text-center mb-4 text-green-800">
-        {isEnglish ? "Daily Tasks in Ramadan" : "رمضان چیک لسٹ"}
-      </h1>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h5 className="text-slate-700">The Right Path</h5>
+          <h1 className="text-2xl font-bold text-slate-800">
+            {isEnglish ? "Daily Tasks in Ramadan" : "رمضان چیک لسٹ"}
+          </h1>
+        </div>
 
-      {/* Buttons */}
-      <div className="flex justify-center mb-4 space-x-4">
-        <button
-          onClick={downloadPDF}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          {isEnglish ? "Download your result" : "نتائج ڈاؤن لوڈ کریں"}
-        </button>
-        <button
-          // onClick={toggleLanguage}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          {isEnglish ? "Change Language" : "زبان بدلیں"}
-        </button>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 text-sm text-slate-600">
+            <span className="h-3 w-3 rounded-full bg-green-500 inline-block" />
+            <span>Yes</span>
+            <span className="h-3 w-3 rounded-full bg-red-500 inline-block ml-3" />
+            <span>No</span>
+          </div>
+
+          <button
+            onClick={downloadPDF}
+            className="bg-teal-600 text-white px-4 py-2 rounded shadow hover:brightness-110 transition"
+          >
+            {isEnglish ? "Download" : "ڈاؤن لوڈ"}
+          </button>
+
+          <button
+            onClick={() => setIsEnglish(!isEnglish)}
+            className="bg-slate-100 px-3 py-2 rounded text-sm hover:bg-slate-200 transition"
+            aria-pressed={!isEnglish}
+          >
+            {isEnglish ? "اردو" : "English"}
+          </button>
+        </div>
       </div>
 
       {/* Checklist */}
       <div
         id="checklist-table"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         {tasks.map((task, taskIndex) => (
           <div
             key={taskIndex}
-            className="border rounded-lg p-4 bg-green-100 flex flex-col justify-between min-h-[300px]"
+            className="card-elevated border border-slate-100 rounded-xl p-5 flex flex-col justify-between min-h-[300px] hover:shadow-lg transition"
           >
             <h2
               className={`font-bold text-lg mb-2 ${
@@ -159,30 +173,31 @@ const Checklist = () => {
             >
               {task}
             </h2>
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-6 gap-3">
               {Array.from({ length: 30 }, (_, dayIndex) => (
                 <div key={dayIndex} className="relative">
-                  <div
-                    className={`h-10 w-10 flex items-center justify-center rounded-full cursor-pointer ${
+                  <button
+                    aria-label={`Day ${dayIndex + 1}`}
+                    className={`h-10 w-10 flex items-center justify-center rounded-full cursor-pointer transition-shadow duration-150 ${
                       checklist[taskIndex][dayIndex] === "yes"
-                        ? "bg-green-500 text-white font-medium"
+                        ? "bg-green-500 text-white font-medium shadow-lg"
                         : checklist[taskIndex][dayIndex] === "no"
-                        ? "bg-red-500 text-white font-medium"
-                        : "bg-gray-200"
+                        ? "bg-red-500 text-white font-medium shadow-lg"
+                        : "bg-gray-200 text-slate-700 hover:shadow-sm"
                     }`}
                     onClick={() => confirmSelection(taskIndex, dayIndex)}
                   >
                     {dayIndex + 1}
-                  </div>
+                  </button>
 
                   {pendingUpdate.taskIndex === taskIndex &&
                     pendingUpdate.dayIndex === dayIndex && (
-                      <div className="absolute z-10 bg-white border rounded-lg w-[80px] shadow-md mt-2 left-0 right-0">
+                      <div className="absolute z-20 bg-white border rounded-lg w-[120px] shadow-md mt-2 left-1/2 transform -translate-x-1/2">
                         <button
                           onClick={() =>
                             handleSelection(taskIndex, dayIndex, "yes")
                           }
-                          className="block px-4 py-2 text-green-600 hover:bg-green-200 w-full text-center"
+                          className="block px-4 py-2 text-green-600 hover:bg-green-50 w-full text-center"
                         >
                           Yes
                         </button>
@@ -190,15 +205,15 @@ const Checklist = () => {
                           onClick={() =>
                             handleSelection(taskIndex, dayIndex, "no")
                           }
-                          className="block px-4 py-2 text-red-600 hover:bg-red-200 w-full text-center"
+                          className="block px-4 py-2 text-red-600 hover:bg-red-50 w-full text-center"
                         >
                           No
                         </button>
                         <button
                           onClick={() =>
                             handleSelection(taskIndex, dayIndex, null)
-                          } // Clear the selection
-                          className="block px-4 py-2 text-gray-600 hover:bg-gray-200 w-full text-center"
+                          }
+                          className="block px-4 py-2 text-gray-600 hover:bg-gray-50 w-full text-center"
                         >
                           Remove
                         </button>

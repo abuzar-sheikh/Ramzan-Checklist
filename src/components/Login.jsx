@@ -45,9 +45,11 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-green-200 to-green-600">
+    <div className="flex items-center justify-center py-12 px-6 sm:px-0">
       <div className="bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm">
-        <h2 className="text-3xl font-semibold text-white text-center mb-3"></h2>
+        <h2 className="text-2xl font-semibold text-white text-center mb-3">
+          Contact / Feedback
+        </h2>
 
         <form
           action="https://formspree.io/f/xldjdbnn"
@@ -95,13 +97,6 @@ const Login = () => {
             >
               Send
             </button>
-            {/* <button
-              onClick={() => navigate("/dua")}
-              type="submit"
-              className="text-white font-medium w-1/2 py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900"
-            >
-              Skip
-            </button> */}
           </div>
         </form>
       </div>

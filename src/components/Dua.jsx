@@ -5,37 +5,40 @@ import { useNavigate } from "react-router-dom";
 const Dua = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-[90%] p-8 bg-pink-200 md:h-screen md:w-full flex flex-col items-center justify-center">
-      <h2 className="my-3 font-bold bg-pink-500 text-white w-full text-center shadow-lg p-2">
-        Muhib e Islam (Islamic Corner){" "}
-      </h2>
-      <p className="py-3 font-bold">
-        السلام علیکم ورحمتہ اللہ وبرکاتہ👀 امید ہے آپ سب بخیر و عافیت سے ہونگے
-        ان شاءاللہ ✨ ایک بہت ضروری بات کرنا چاہتی ہوں جس کے لیے آپ سب کی توجہ
-        کی منتظر ہوں لہٰذا نظرِ توجہ فرمائیے۔۔۔۔ جیسا کہ ہم سب جانتے ہیں کی عید
-        الفطر میں اب کچھ دن ہی باقی ہیں✨ تو میری طرف سے آپ سب کو پہلے سے ہی
-        (ایڈوانس) عید الفطر مبارک ہو اللہ سبحانہ وتعالی آپکے ہر دن کو عید کے دن
-        کی طرح خاص بنائے آمین🤍✨ چند دنوں بعد عید الفطر کا دن ہوگا، ہر طرف خوشی
-        کا ماحول ہوگا ان شاء اللہ 💗 لیکن دیکھیں جو چیز عید کے دن کو مکمل کرتی
-        ہے، وہ ہے عیدی!👀 اب آپ سب سوچ رہے ہونگے کہ میں کیوں اتنی محبت سے عید کی
-        مبارکباد دینے کے ساتھ ساتھ "عیدی" کا ذکر کر رہی ہوں؟ تو اس کا جواب بہت
-        سادہ ہے، ور آپ سب کو بھی اچھی طرح معلوم ہے؛ "عید کی خوشبو کا اصل مزہ تو
-        عیدی کے ساتھ ہی ہے!"🤭 اور عید کے دن خوشیاں دو طریقوں سے بڑھتی ہیں: 1.
-        دل سے دعائیں 💖 2. اور دوسری خوشی جو عیدی سے ملتی ہے😁 تو بس میں آپ سب
-        کو یاد دلانا چاہ رہی ہوں کہ اس عید پر میری خوشیوں میں وہ خاص رنگ شامل
-        کریں جو "عیدی" کا ہے🤭😂 یاد رکھیں، میری دعائیں ہمیشہ آپ کے ساتھ ہیں، تو
-        اس عید پر آپ کی محبت اور عیدی، دونوں کا میرے ساتھ ہونا بھی ضروری
-        ہے🤭💗😂۔۔۔ اور ایک اور پیار بھرا ریمائنڈر (Reminder)📌 ، "عیدی" کے
-        بغیر، عید نامکمل ہے، لہٰذا مجھے بغیر "عیدی" کے کوئی "عید مبارک" کا میسج
-        بھی نا کرے👈🏻👉🏻۔۔۔۔۔۔ منجانب: آپکی پیاری سی ایڈمن😂
-      </p>
+    <div className="min-h-[70vh] flex items-center justify-center">
+      <div className="card-elevated max-w-3xl w-full p-8">
+        <div className="flex items-center gap-4 mb-4">
+          {/* <img src={img} alt="cover" className="h-14 w-14 rounded-lg object-cover" /> */}
+          <div className="w-full">
+            <h2 className="text-lg text-center font-bold text-slate-800">
+              The Right Path
+            </h2>
+            <p className="text-sm text-slate-600 text-center">Islamic Corner</p>
+          </div>
+        </div>
 
-      <button
-        onClick={() => navigate("/checklist")}
-        className="bg-pink-500 hover:bg-pink-700 shadow-lg transition-all duration-300 w-full rounded py-2 mt-3 text-white"
-      >
-        Next
-      </button>
+        <div className="prose max-w-none text-right text-slate-700">
+          <p>
+            السلام علیکم ورحمتہ اللہ وبرکاتہ۔ امید ہے آپ سب بخیر و عافیت ہوں گے۔
+            عید الفطر نزدیک ہے — میری طرف سے پیشگی عید مبارک! اللہ آپکا ہر دن
+            خوشیوں سے بھر دے۔
+          </p>
+
+          <p>
+            خواہش ہے کہ آپ میرے ساتھ خوشی بانٹیں۔ اس پیج پر آپ روزانہ کے اعمال
+            نوٹ کر سکتے ہیں اور اپنا نتیجہ پی ڈی ایف میں ڈاؤن لوڈ کر سکتے ہیں۔
+          </p>
+        </div>
+
+        <div className="mt-6">
+          <button
+            onClick={() => navigate("/checklist")}
+            className="bg-teal-600 hover:bg-teal-700 text-white rounded-md py-2 px-4 shadow"
+          >
+            Next — Checklist
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
