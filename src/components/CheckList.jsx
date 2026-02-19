@@ -141,7 +141,7 @@ const Checklist = () => {
       <div className="flex justify-between py-4">
         <h5 className="text-slate-700 font-bold">
           {" "}
-          {isEnglish ? "The Right Path" : "دی رائٹ پاتھ"}
+          {isEnglish ? "The Right Path" : "دی رائیٹ پاتھ"}
         </h5>
         <h1 className="text:lg sm:text-2xl text-slate-800">
           {isEnglish ? "Daily Tasks in Ramadan" : "رمضان چیک لسٹ"}
@@ -234,7 +234,7 @@ const Checklist = () => {
                           }
                           className="block px-4 py-2 text-gray-600 hover:bg-gray-50 w-full text-center"
                         >
-                          {isEnglish ? "Remove" : "ہٹائں"}
+                          {isEnglish ? "Remove" : "ہٹائیں"}
                         </button>
                       </div>
                     )}
