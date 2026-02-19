@@ -121,24 +121,31 @@ const Checklist = () => {
     setIsEnglish(!isEnglish); // Toggle between English and Urdu
   };
 
+  // Handle reset with confirmation
+  const handleReset = () => {
+    const confirmed = window.confirm(
+      isEnglish
+        ? "Are you sure you want to reset all marked tasks? This action cannot be undone."
+        : "کیا آپ تمام نشان زدہ کام کو ری سیٹ کرنا چاہتے ہیں؟ یہ عمل واپس نہیں کیا جا سکتا۔",
+    );
+
+    if (confirmed) {
+      const resetChecklist = tasks.map(() => Array(30).fill(null));
+      setChecklist(resetChecklist);
+      localStorage.setItem("checklist", JSON.stringify(resetChecklist));
+    }
+  };
+
   return (
     <div className="px-4 ">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h5 className="text-slate-700">The Right Path</h5>
-          <h1 className="text-2xl font-bold text-slate-800">
-            {isEnglish ? "Daily Tasks in Ramadan" : "رمضان چیک لسٹ"}
-          </h1>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-sm text-slate-600">
-            <span className="h-3 w-3 rounded-full bg-green-500 inline-block" />
-            <span>Yes</span>
-            <span className="h-3 w-3 rounded-full bg-red-500 inline-block ml-3" />
-            <span>No</span>
-          </div>
-
+      <div className="flex justify-between py-4">
+        <h5 className="text-slate-700 font-bold">The Right Path</h5>
+        <h1 className="text:lg sm:text-2xl text-slate-800">
+          {isEnglish ? "Daily Tasks in Ramadan" : "رمضان چیک لسٹ"}
+        </h1>
+      </div>
+      <div className="flex items-center py-4 gap-3 justify-between">
+        <div className="flex gap-3">
           <button
             onClick={downloadPDF}
             className="bg-teal-600 text-white px-4 py-2 rounded shadow hover:brightness-110 transition"
@@ -147,11 +154,20 @@ const Checklist = () => {
           </button>
 
           <button
+            onClick={handleReset}
+            className="bg-red-600 text-white px-4 py-2 rounded shadow hover:brightness-110 transition"
+          >
+            {isEnglish ? "Reset" : "ری سیٹ"}
+          </button>
+        </div>
+
+        <div>
+          <button
             onClick={() => setIsEnglish(!isEnglish)}
-            className="bg-slate-100 px-3 py-2 rounded text-sm hover:bg-slate-200 transition"
+            className="bg-slate-300 px-3 py-2 rounded border text-sm hover:border-slate-500 transition"
             aria-pressed={!isEnglish}
           >
-            {isEnglish ? "اردو" : "English"}
+            {isEnglish ? "اردو میں" : "English"}
           </button>
         </div>
       </div>
@@ -182,8 +198,8 @@ const Checklist = () => {
                       checklist[taskIndex][dayIndex] === "yes"
                         ? "bg-green-500 text-white font-medium shadow-lg"
                         : checklist[taskIndex][dayIndex] === "no"
-                        ? "bg-red-500 text-white font-medium shadow-lg"
-                        : "bg-gray-200 text-slate-700 hover:shadow-sm"
+                          ? "bg-red-500 text-white font-medium shadow-lg"
+                          : "bg-gray-200 text-slate-700 hover:shadow-sm"
                     }`}
                     onClick={() => confirmSelection(taskIndex, dayIndex)}
                   >
