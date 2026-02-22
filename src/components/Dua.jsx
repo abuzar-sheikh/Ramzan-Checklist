@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../assets/dua/3.jpeg";
+import img from "../assets/dua/4.jpeg";
 import { useNavigate } from "react-router-dom";
 
 const Dua = () => {
